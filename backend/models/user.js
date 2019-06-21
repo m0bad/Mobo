@@ -24,13 +24,25 @@ const userSchema = new mongoose.Schema({
   age: {
     type: Number,
     required: true
-  } //,
-  // teams: [
-  //   {
-  //     type: mongoose.Schema.Types.ObjectId,
-  //     ref: "Team"
-  //   }
-  // ]
+  },
+  teams: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Team"
+    }
+  ],
+  messages: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Message"
+    }
+  ],
+  complains: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Complain"
+    }
+  ]
 });
 
 userSchema.plugin(uniqueValidator);

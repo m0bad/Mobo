@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const User = require("./user");
 const Message = require("./message");
 const Complain = require("./complain");
+const uniqueValidator = require("mongoose-unique-validator");
 
 const teamSchema = new mongoose.Schema({
   githubRepo: {
@@ -10,7 +11,8 @@ const teamSchema = new mongoose.Schema({
   },
   name: {
     type: String,
-    required: true
+    required: true,
+    unique: true
   },
   imageUrl: {
     type: String
@@ -41,20 +43,22 @@ const teamSchema = new mongoose.Schema({
   ]
 });
 
-const clearUserRecords = async user => {
-  let _user = await User.findById(user);
-  _user.teams.remove(this.id);
-  await _user.save();
+teamSchema.plugin(uniqueValidator);
+
+const clearUserRecords = async (userId, teamId) => {
+  let user = await User.findById(userId);
+  user.teams.remove(teamId);
+  await user.save();
 };
 
 const clearMessageRecords = async message => {
   let _message = await Message.findByIdAndRemove(message);
-  await _message.save();
+  // await _message.save();
 };
 
 const clearComplainRecords = async complain => {
   let _complain = await Complain.findByIdAndRemove(complain);
-  await _complain.save();
+  // await _complain.save();
 };
 
 teamSchema.pre("remove", async function(next) {
@@ -68,7 +72,7 @@ teamSchema.pre("remove", async function(next) {
     // clear the instructors records
     await Promise.all(
       this.instructors.map(instructor => {
-        clearUserRecords(instructor);
+        clearUserRecords(instructor, this._id);
       })
     );
     // clear the messages record
