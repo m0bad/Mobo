@@ -24,11 +24,18 @@ exports.isLoggedIn = (req, res, next) => {
 };
 
 exports.isInstructor = async (req, res, next) => {
-  const team = await db.Team.findById(req.params.teamId);
-  let is_instructor = team.instructors.includes(req.params.userId);
-  if (is_instructor) {
-    return next();
-  } else {
+  try {
+    const team = await db.Team.findById(req.params.teamId);
+    let is_instructor = team.instructors.includes(req.params.userId);
+    if (is_instructor) {
+      return next();
+    } else {
+      return next({
+        status: 401,
+        message: "Unauthorized"
+      });
+    }
+  } catch (err) {
     return next({
       status: 401,
       message: "Unauthorized"

@@ -10,9 +10,14 @@ const {
 
 // prefix: /api/team/:userId
 
-router.post("/", isLoggedIn, createTeam);
+router.post("/",  createTeam);
+// router.post("/", isLoggedIn, createTeam);
+
 router.delete("/:teamId", isLoggedIn, isInstructor, deleteTeam);
-router.post("/:teamId/:userToAddId", isLoggedIn, isInstructor, addUser);
+
+// router.post("/:teamId/:userToAddId", isLoggedIn, isInstructor, addUser);
+router.post("/:teamId/:userToAddId",  addUser);
+
 router.delete("/:teamId/:userToRemoveId", isLoggedIn, isInstructor, deleteUser);
 
 module.exports = router;

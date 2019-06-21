@@ -6,6 +6,8 @@ const bodyParser = require("body-parser");
 const errorHandler = require("./controllers/errorHandler");
 const authRoutes = require("./routes/auth");
 const teamRoutes = require("./routes/team");
+const messageRoutes = require("./routes/message");
+const complainRoutes = require("./routes/complain");
 // basic setup
 const PORT = 8080;
 app.use(cors());
@@ -13,7 +15,12 @@ app.use(bodyParser.json());
 
 // routes
 app.use("/api/auth", authRoutes);
-app.use("/api/team/:userId", teamRoutes);
+
+app.use("/api/teams/:userId", teamRoutes);
+
+app.use("/api/teams/messages/:teamId/:userId", messageRoutes);
+
+app.use("/api/teams/complains/:teamId/:studentId/:instructorId", complainRoutes);
 
 // err handling
 app.use((req, res, next) => {
