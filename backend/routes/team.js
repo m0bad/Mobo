@@ -1,6 +1,6 @@
 const express = require("express");
-const router = express.Router({mergeParams: true});
-
+const router = express.Router({ mergeParams: true });
+const { isLoggedIn, isInstructor } = require("../middlewares");
 const {
   createTeam,
   deleteTeam,
@@ -10,9 +10,9 @@ const {
 
 // prefix: /api/team/:userId
 
-router.post("/", createTeam);
-router.delete("/:teamId", deleteTeam);
-router.post("/:teamId/:userToAddId", addUser);
-router.delete("/:teamId/:userToRemoveId", deleteUser);
+router.post("/", isLoggedIn, createTeam);
+router.delete("/:teamId", isLoggedIn, isInstructor, deleteTeam);
+router.post("/:teamId/:userToAddId", isLoggedIn, isInstructor, addUser);
+router.delete("/:teamId/:userToRemoveId", isLoggedIn, isInstructor, deleteUser);
 
 module.exports = router;
