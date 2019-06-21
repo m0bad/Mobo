@@ -7,3 +7,6 @@ mongoose.connect('mongodb://localhost/Mobo', {
 });
 
 module.exports.User = require('./user');
+module.exports.Team = require('./team');
+module.exports.Complain = require('./complain');
+module.exports.Message = require('./message');
