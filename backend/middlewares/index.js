@@ -43,6 +43,38 @@ exports.isInstructor = async (req, res, next) => {
   }
 };
 
-// exports.isTeamMember = async (req, res, next) => {
-//
-// }
+exports.isTeamMember = async (req, res, next) => {
+  try {
+    const team = await db.Team.findById(req.params.teamId);
+    let is_member = team.students.includes(req.params.userId);
+    let instructor_id = req.params.instructorId;
+    let is_instructor = null;
+    if (instructorId) {
+      is_instructor = team.instructors.includes(instructor_id);
+    }
+    if (is_instructor !== null) {
+      if (is_member || is_instructor) {
+        return next();
+      } else {
+        return next({
+          status: 401,
+          message: "Unauthorized"
+        });
+      }
+    } else {
+      if (is_member) {
+        return next();
+      } else {
+        return next({
+          status: 401,
+          message: "Unauthorized"
+        });
+      }
+    }
+  } catch (err) {
+    return next({
+      status: 401,
+      message: "Unauthorized"
+    });
+  }
+};

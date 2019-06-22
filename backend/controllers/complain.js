@@ -5,13 +5,11 @@ exports.sendComplain = async (req, res, next) => {
   try {
     const complain = await db.Complain.create({
       text: req.body.text,
-      sender: req.params.studentId,
+      sender: req.params.userId,
       reciever: req.params.instructorId,
       room: req.params.teamId
     });
-    console.log(req.params.studentId);
-    console.log(req.params.teamId);
-    const user = await db.User.findById(req.params.studentId);
+    const user = await db.User.findById(req.params.userId);
     const team = await db.Team.findById(req.params.teamId);
     user.complains.push(complain._id);
     await user.save();

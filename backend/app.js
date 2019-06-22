@@ -20,7 +20,7 @@ app.use("/api/teams/:userId", teamRoutes);
 
 app.use("/api/teams/messages/:teamId/:userId", messageRoutes);
 
-app.use("/api/teams/complains/:teamId/:studentId/:instructorId", complainRoutes);
+app.use("/api/teams/complains/:teamId/:userId/:instructorId", complainRoutes);
 
 // err handling
 app.use((req, res, next) => {

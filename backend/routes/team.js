@@ -8,16 +8,13 @@ const {
   deleteUser
 } = require("../controllers/team");
 
-// prefix: /api/team/:userId
-
-router.post("/",  createTeam);
-// router.post("/", isLoggedIn, createTeam);
-
+// create new team
+router.post("/", isLoggedIn, createTeam);
+// delete a team
 router.delete("/:teamId", isLoggedIn, isInstructor, deleteTeam);
-
-// router.post("/:teamId/:userToAddId", isLoggedIn, isInstructor, addUser);
-router.post("/:teamId/:userToAddId",  addUser);
-
+// add user to team
+router.post("/:teamId/:userToAddId", isLoggedIn, isInstructor, addUser);
+// delete user from team
 router.delete("/:teamId/:userToRemoveId", isLoggedIn, isInstructor, deleteUser);
 
 module.exports = router;

@@ -1,4 +1,12 @@
 const db = require("../models");
+exports.getMessages = async (req, res, next) => {
+  try {
+    const team = await db.Team.findById(req.params.teamId);
+    return res.status(200).json(team.messages);
+  } catch (err) {
+    return next(err);
+  }
+};
 
 exports.sendMessage = async (req, res, next) => {
   try {
