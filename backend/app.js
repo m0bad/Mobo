@@ -9,7 +9,7 @@ const teamRoutes = require("./routes/team");
 const messageRoutes = require("./routes/message");
 const complainRoutes = require("./routes/complain");
 // basic setup
-const PORT = 8080;
+const PORT = 5050;
 app.use(cors());
 app.use(bodyParser.json());
 
