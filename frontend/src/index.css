@@ -11,3 +11,8 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.authForm {
+  padding-top: 10rem;
+  margin: 20px;
+}
