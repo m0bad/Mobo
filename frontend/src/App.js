@@ -3,7 +3,7 @@ import { Switch, Route } from "react-router";
 import { BrowserRouter as Router } from "react-router-dom";
 import NavBar from "./containers/Navbar/NavBar";
 import MenuItem from "./containers/Navbar/MenuItem";
-import LoginForm from "./components/Form";
+import AuthForm from "./components/forms/AuthForm";
 function App() {
   return (
     <Router>
@@ -52,14 +52,14 @@ function App() {
             exact
             path="/signin"
             render={() => (
-              <LoginForm heading="Welcome Back" buttonText="sign in"/>
+              <AuthForm heading="Welcome Back" buttonText="sign in"/>
             )}
           />
           <Route
             exact
             path="/signup"
             render={() => (
-              <LoginForm heading="Join Mobo Now" buttonText="sign up" signUp />
+              <AuthForm heading="Join Mobo Now" buttonText="sign up" signUp />
             )}
           />
         </Switch>

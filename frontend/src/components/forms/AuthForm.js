@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 // import { Form, Button } from "react-bootstrap";
 
-class LoginForm extends Component {
+class AuthForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -113,4 +113,4 @@ class LoginForm extends Component {
   }
 }
 
-export default LoginForm;
+export default AuthForm;
