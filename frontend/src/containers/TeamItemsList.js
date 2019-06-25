@@ -1,18 +1,25 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { fetchTeams } from "../store/actions/teams";
-// import TeamItem from "../components/TeamItem";
+import TeamItem from "../components/TeamItem";
 
 class TeamItemsList extends Component {
   componentDidMount() {
-    this.props.fetchTeams(this.props.currentUser.user.id, localStorage.jwtToken);
+    this.props.fetchTeams(
+      this.props.currentUser.user.id,
+      localStorage.jwtToken
+    );
   }
   render() {
-    // let teamList = [];
-    // let teamList = data.map(t => (
-    //   <TeamItem name={t.name} imageUrl={t.imageUrl} />
-    // ));
-    return <h1>Welcome teams</h1>;
+    let teamList = [];
+    if (this.props.teams.teams) {
+      let userTeams = this.props.teams.teams;
+      teamList = userTeams.map(t => (
+        <TeamItem name={t.name} imageUrl={t.imageUrl} />
+      ));
+    }
+
+    return <div>{teamList}</div>;
   }
 }
 

@@ -5,6 +5,7 @@ import AuthForm from "../components/forms/AuthForm";
 import { authUser } from "../store/actions/auth";
 import { removeError } from "../store/actions/errors";
 import HomePage from "../components/HomePage";
+
 const Main = props => {
   const { authUser, errors, removeError, currentUser } = props;
   return (

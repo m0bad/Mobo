@@ -15,7 +15,7 @@ export function logout() {
     localStorage.clear();
     setAuthorizationToken(false);
     dispatch(setCurrentUser({}));
-    dispatch(loadTeams({}));
+    dispatch(loadTeams([]));
   };
 }
 

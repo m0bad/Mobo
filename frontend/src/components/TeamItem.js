@@ -2,8 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import DefaultTeamImg from "../images/team.jpg";
 
-// const TeamItem = ({ name, imageUrl }) => {
-const TeamItem = () => {
+const TeamItem = ({ name, imageUrl }) => {
   return (
     <div className="col-md-3 TeamItem">
       <div>
@@ -16,7 +15,7 @@ const TeamItem = () => {
       </div>
       <div className="team-item-text">
         <Link to="/signin" className="btn btn-lg btn-primary">
-          my name
+          {name}
         </Link>
       </div>
     </div>
