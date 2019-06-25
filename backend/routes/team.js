@@ -2,12 +2,15 @@ const express = require("express");
 const router = express.Router({ mergeParams: true });
 const { isLoggedIn, isInstructor } = require("../middlewares");
 const {
+  getTeams,
   createTeam,
   deleteTeam,
   addUser,
   deleteUser
 } = require("../controllers/team");
 
+// list user teams
+router.get("/", isLoggedIn, getTeams);
 // create new team
 router.post("/", isLoggedIn, createTeam);
 // delete a team

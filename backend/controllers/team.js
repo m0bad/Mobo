@@ -1,5 +1,20 @@
 const db = require("../models");
 
+exports.getTeams = async (req, res, next) => {
+  try {
+    let user = await db.User.findById(req.params.userId);
+    let result = [];
+    let userTeams = user.teams.map(async t => {
+      let team = await db.Team.findById(t);
+      result.push(team);
+    });
+    await Promise.all(userTeams);
+    return res.status(200).json(result);
+  } catch (err) {
+    return next(err);
+  }
+};
+
 exports.createTeam = async (req, res, next) => {
   try {
     let creator = await db.User.findById(req.params.userId);
