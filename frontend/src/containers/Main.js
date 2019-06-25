@@ -2,12 +2,14 @@ import React from "react";
 import { Switch, Route, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import AuthForm from "../components/forms/AuthForm";
+import TeamForm from "../components/forms/TeamForm";
 import { authUser } from "../store/actions/auth";
+import { createTeam } from "../store/actions/teams";
 import { removeError } from "../store/actions/errors";
 import HomePage from "../components/HomePage";
 
 const Main = props => {
-  const { authUser, errors, removeError, currentUser } = props;
+  const { authUser, errors, removeError, currentUser, createTeam } = props;
   return (
     <main className="l-main">
       <Switch>
@@ -15,6 +17,17 @@ const Main = props => {
           exact
           path="/"
           render={() => <HomePage currentUser={currentUser} {...props} />}
+        />
+        <Route
+          exact
+          path="/newTeam"
+          render={() => (
+            <TeamForm
+              onTeamCreation={createTeam}
+              currentUser={currentUser}
+              {...props}
+            />
+          )}
         />
         <Route
           exact
@@ -61,6 +74,6 @@ function mapStateToProps(state) {
 export default withRouter(
   connect(
     mapStateToProps,
-    { authUser, removeError }
+    { authUser, removeError, createTeam }
   )(Main)
 );

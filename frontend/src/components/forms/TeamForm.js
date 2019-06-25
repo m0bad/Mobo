@@ -11,10 +11,16 @@ class TeamForm extends Component {
     };
   }
 
+  componentDidMount(){
+      if(!this.props.currentUser.isAuthenticated){
+          this.props.history.push('/signin');
+      }
+  }
+
   handleSubmit = event => {
     event.preventDefault();
     this.props
-      .onTeamCreation(this.state)
+      .onTeamCreation(this.props.currentUser.user.id,localStorage.jwtToken,this.state)
       .then(() => this.props.history.push("/"))
       .catch(err => {});
   };
@@ -37,7 +43,7 @@ class TeamForm extends Component {
               <input
                 type="text"
                 className="form-control"
-                placeholder="enter your username"
+                placeholder="enter team name"
                 name="name"
                 onChange={this.handleChange}
                 value={name}
