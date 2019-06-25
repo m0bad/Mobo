@@ -28,25 +28,41 @@ class AuthForm extends Component {
 
   render() {
     const { email, password, username, university, age } = this.state;
-    const { signUp, heading, buttonText } = this.props;
+    const {
+      signUp,
+      heading,
+      buttonText,
+      errors,
+      history,
+      removeError
+    } = this.props;
+    //if there is any change in the routes
+    history.listen(()=>{
+        removeError();
+    })
     return (
       <div className="text-center row justify-content-md-center authForm">
         <div className="col-md-6">
           <h2>{heading}</h2>
+          {errors.message && (
+              <div className='alert alert-danger'>{errors.message}</div>
+          )}
           <form
             className="border border-light p-5 authForm"
             onSubmit={this.handleSubmit}
           >
             <div className="form-group">
               <input
-                type="text"
+                type="email"
                 className="form-control"
-                placeholder="enter your username"
-                name="username"
+                aria-describedby="emailHelp"
+                placeholder="Enter email"
+                name="email"
                 onChange={this.handleChange}
-                value={username}
+                value={email}
               />
             </div>
+
             <div className="form-group">
               <input
                 type="password"
@@ -61,13 +77,12 @@ class AuthForm extends Component {
               <div>
                 <div className="form-group">
                   <input
-                    type="email"
+                    type="text"
                     className="form-control"
-                    aria-describedby="emailHelp"
-                    placeholder="Enter email"
-                    name="email"
+                    placeholder="enter your username"
+                    name="username"
                     onChange={this.handleChange}
-                    value={email}
+                    value={username}
                   />
                 </div>
                 <div className="form-group">
