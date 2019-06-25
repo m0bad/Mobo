@@ -1,8 +1,13 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import { logout } from "../../store/actions/auth";
 
 class Navbar extends Component {
+  logout = event => {
+    event.preventDefault();
+    this.props.logout();
+  };
   render() {
     return (
       <nav className="navbar navbar-expand">
@@ -22,17 +27,16 @@ class Navbar extends Component {
               </li>
             </ul>
           ) : (
-              <div>
-
-            <ul className="nav navbar-nav navbar-right">
-              <li>
-                <Link to="/signup">Sign up</Link>
-              </li>
-              <li>
-                <Link to="/signin">Log in</Link>
-              </li>
-            </ul>
-        </div>
+            <div>
+              <ul className="nav navbar-nav navbar-right">
+                <li>
+                  <Link to="/signup">Sign up</Link>
+                </li>
+                <li>
+                  <Link to="/signin">Log in</Link>
+                </li>
+              </ul>
+            </div>
           )}
         </div>
       </nav>
@@ -48,5 +52,5 @@ function mapStatetoProps(state) {
 
 export default connect(
   mapStatetoProps,
-  null
+  {logout}
 )(Navbar);

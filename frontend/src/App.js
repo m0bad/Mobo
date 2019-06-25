@@ -9,15 +9,15 @@ import { setAuthorizationToken, setCurrentUser } from "./store/actions/auth";
 
 const store = configureStore();
 
-// if (localStorage.jwtToken) {
-//   setAuthorizationToken(localStorage.jwtToken);
-//   //prevent someone from manually tempering with the key of jwtToken in localStorage
-//   try {
-//     store.dispatch(setCurrentUser(jwtDecode(localStorage.jwtToken)));
-//   } catch (err) {
-//     store.dispatch(setCurrentUser({}));
-//   }
-// }
+if (localStorage.jwtToken) {
+  setAuthorizationToken(localStorage.jwtToken);
+  //prevent someone from manually tempering with the key of jwtToken in localStorage
+  try {
+    store.dispatch(setCurrentUser(jwtDecode(localStorage.jwtToken)));
+  } catch (err) {
+    store.dispatch(setCurrentUser({}));
+  }
+}
 
 function App() {
   return (
