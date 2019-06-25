@@ -1,14 +1,23 @@
 import React from "react";
 import { BrowserRouter as Router } from "react-router-dom";
 import { Provider } from "react-redux";
-// import jwtDecode from "jwt-decode";
+import jwtDecode from "jwt-decode";
 import NavBar from "./containers/Navbar/NavBar";
-import MenuItem from "./containers/Navbar/MenuItem";
 import { configureStore } from "./store";
 import Main from "./containers/Main";
-// import { setAuthorizationToken, setCurrentUser } from "./store/actions/auth";
+import { setAuthorizationToken, setCurrentUser } from "./store/actions/auth";
 
 const store = configureStore();
+
+// if (localStorage.jwtToken) {
+//   setAuthorizationToken(localStorage.jwtToken);
+//   //prevent someone from manually tempering with the key of jwtToken in localStorage
+//   try {
+//     store.dispatch(setCurrentUser(jwtDecode(localStorage.jwtToken)));
+//   } catch (err) {
+//     store.dispatch(setCurrentUser({}));
+//   }
+// }
 
 function App() {
   return (
@@ -38,18 +47,7 @@ function App() {
             href="https://asker-management-test.revinate.com/components/styleguide/_site/css/app-alt.css"
           />
         </div>
-        <NavBar>
-          <MenuItem label="Home" href="/" />
-          <MenuItem label="About Us" href="/about" />
-          <MenuItem label="Contact Us" href="/contact" />
-          <MenuItem
-            label="Sign in"
-            href="/signin"
-            pulledRight={true}
-            isExternalUrl={true}
-          />
-          <MenuItem label="Sign up" href="/signup" pulledRight={true} />
-        </NavBar>
+        <NavBar />
         <Main />
       </Router>
     </Provider>

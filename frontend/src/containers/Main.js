@@ -4,15 +4,17 @@ import { connect } from "react-redux";
 import AuthForm from "../components/forms/AuthForm";
 import { authUser } from "../store/actions/auth";
 import { removeError } from "../store/actions/errors";
-
+import HomePage from "../components/HomePage";
 const Main = props => {
-  const { authUser, errors, removeError } = props;
+  const { authUser, errors, removeError, currentUser } = props;
   return (
     <main className="l-main">
       <Switch>
-        <Route exact path="/" render={() => <h1>Welcom</h1>} />
-        <Route exact path="/about" render={() => <h1>about</h1>} />
-        <Route exact path="/contact" render={() => <h1>contact</h1>} />
+        <Route
+          exact
+          path="/"
+          render={() => <HomePage currentUser={currentUser} {...props} />}
+        />
         <Route
           exact
           path="/signin"

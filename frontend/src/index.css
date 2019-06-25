@@ -16,3 +16,32 @@ code {
   padding-top: 10rem;
   margin: 20px;
 }
+.jumbo {
+  padding-top: 10rem;
+  color: "#000000";
+}
+
+.btn-landing {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: black;
+}
+
+.team-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* padding: 3rem; */
+}
+
+.team-item-text {
+  padding-top: 3rem;
+  padding-left: 8%;
+  padding-bottom: 5rem;
+}
+
+.team-list{
+    padding-left: 15rem;
+}

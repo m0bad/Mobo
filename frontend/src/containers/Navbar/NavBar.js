@@ -1,40 +1,52 @@
-import React from "react";
-import { Nav } from "react-bootstrap";
-import styled from "styled-components";
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 
-const NavBar = props => (
-  <header className="l-header navbar-fixed-top">
-    <div className="l-header-top">
-      <div className="container-fluid">
-        <Nav className="primary-menu alt">
-          {props.children}
-        </Nav>
-      </div>
-    </div>
-  </header>
-);
+class Navbar extends Component {
+  render() {
+    return (
+      <nav className="navbar navbar-expand">
+        <div className="container-fluid">
+          <div className="navbar-header">
+            <Link to="/" className="navbar-brand">
+              <i>Mobo</i>
+            </Link>
+          </div>
+          {this.props.currentUser.isAuthenticated ? (
+            <ul className="nav navbar-nav navbar-right">
+              <li>
+                <Link to={"/"}>Create Team</Link>
+              </li>
+              <li>
+                <a onClick={this.logout}>Log out</a>
+              </li>
+            </ul>
+          ) : (
+              <div>
 
-export default styled(NavBar)`
-  .primary-menu.nav.nav-tabs.alt > li > a:hover,
-  .primary-menu.nav.nav-tabs.alt > li.open > a,
-  .primary-menu.nav.nav-tabs.alt > li.open > a:active,
-  .primary-menu.nav.nav-tabs.alt > li.open > a:hover,
-  .primary-menu.nav.nav-tabs.alt > li.open > a:focus {
-    color: #99dff9 !important;
-    background: transparent !important;
-    font-weight: normal;
+            <ul className="nav navbar-nav navbar-right">
+              <li>
+                <Link to="/signup">Sign up</Link>
+              </li>
+              <li>
+                <Link to="/signin">Log in</Link>
+              </li>
+            </ul>
+        </div>
+          )}
+        </div>
+      </nav>
+    );
   }
+}
 
-  .primary-menu.nav.nav-tabs.alt > li > a,
-  .primary-menu.nav.nav-tabs.alt > li > a.active {
-    font-weight: bold;
-  }
+function mapStatetoProps(state) {
+  return {
+    currentUser: state.currentUser
+  };
+}
 
-  .primary-menu.alt .dropdown-menu > li {
-    text-align: left;
-  }
-
-  .primary-menu.alt > li.dropdown:hover > ul.dropdown-menu {
-    display: block;
-  }
-`;
+export default connect(
+  mapStatetoProps,
+  null
+)(Navbar);
