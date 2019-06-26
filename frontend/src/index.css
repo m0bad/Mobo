@@ -42,6 +42,37 @@ code {
   padding-bottom: 5rem;
 }
 
-.team-list{
-    padding-left: 15rem;
+.team-list {
+  padding-left: 15rem;
+}
+
+.team-members {
+}
+
+.main-chat {
+    width: 100%;
+    height: 775px;
+    overflow:auto;
+    background-color: white;
+
+}
+
+.msg-form {
+    width: 100%;
+    height:auto;
+    padding-top: 3px;
+}
+
+.member-img {
+  width: 60%;
+  height: auto;
+  max-width: 60%;
+  background-color: '#f2f2f2';
+  border-radius: 50%;
+}
+.member-name {
+  font-size: 24px;
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 4rem;
 }
