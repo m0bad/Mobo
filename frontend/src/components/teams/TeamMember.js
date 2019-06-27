@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import DefaultMemberImg from "../images/member.png";
+import DefaultMemberImg from "../../images/member.png";
 
 const TeamMember = props => {
   return (

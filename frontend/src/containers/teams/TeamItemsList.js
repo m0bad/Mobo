@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { fetchTeams, selectTeam } from "../store/actions/teams";
-import TeamItem from "../components/TeamItem";
+import { fetchTeams, selectTeam } from "../../store/actions/teams";
+import TeamItem from "../../components/teams/TeamItem";
 
 class TeamItemsList extends Component {
   componentDidMount() {

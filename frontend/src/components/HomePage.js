@@ -1,7 +1,7 @@
 import React from "react";
 // import { Link } from "react-router-dom";
 import LandingPage from "./LandingPage";
-import TeamItemsList from '../containers/TeamItemsList';
+import TeamItemsList from '../containers/teams/TeamItemsList';
 
 const HomePage = ({ currentUser }) => {
   if (!currentUser.isAuthenticated) {

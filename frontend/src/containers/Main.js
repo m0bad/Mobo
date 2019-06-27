@@ -7,7 +7,7 @@ import { authUser } from "../store/actions/auth";
 import { createTeam } from "../store/actions/teams";
 import { removeError } from "../store/actions/errors";
 import HomePage from "../components/HomePage";
-import TeamRoom from "./TeamRoom";
+import TeamRoom from "./teams/TeamRoom";
 // render={() => <HomePage currentUser={currentUser} {...props} />}
 
 const Main = props => {

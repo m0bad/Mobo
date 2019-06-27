@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import TeamMember from "../components/TeamMember";
-import { fetchTeamMembers } from "../store/actions/teams";
+import TeamMember from "../../components/teams/TeamMember";
+import { fetchTeamMembers } from "../../store/actions/teams";
 
 class TeamMembersList extends Component {
   componentDidMount() {

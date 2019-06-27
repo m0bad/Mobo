@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import MessagesForm from "../components/forms/MessagesForm";
-import ChatWindow from "./ChatWindow";
-import TeamSettingsList from "./TeamSettingsList";
-import TeamMembersList from "./TeamMembersList";
+import MessagesForm from "../../components/forms/MessagesForm";
+import ChatWindow from "../teams/ChatWindow";
+import TeamSettingsList from "../teams/TeamSettingsList";
+import TeamMembersList from "../teams/TeamMembersList";
 
 class TeamRoom extends Component {
   render() {
