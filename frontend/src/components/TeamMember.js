@@ -8,7 +8,7 @@ const TeamMember = props => {
       <div className="card-body">
         <img src={DefaultMemberImg} alt="name" className="member-img" />
         <div className="member-name">
-          <Link className="card-link">mobad</Link>
+          <Link className="card-link">{props.username}</Link>
         </div>
       </div>
     </div>

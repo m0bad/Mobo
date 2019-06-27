@@ -1,7 +1,7 @@
 import { makeRequest, setTokenHeader } from "../../services/api";
 import { SET_CURRENT_USER } from "../actionTypes";
 import { addError, removeError } from "./errors";
-import { loadTeams } from "./teams";
+import { loadTeams, loadTeamMembers, selectTeam } from "./teams";
 
 export function setCurrentUser(user) {
   return {
@@ -16,6 +16,8 @@ export function logout() {
     setAuthorizationToken(false);
     dispatch(setCurrentUser({}));
     dispatch(loadTeams([]));
+    // dispatch(loadTeamMembers([]));
+    dispatch(selectTeam({}));
   };
 }
 

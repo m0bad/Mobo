@@ -7,11 +7,18 @@ import { authUser } from "../store/actions/auth";
 import { createTeam } from "../store/actions/teams";
 import { removeError } from "../store/actions/errors";
 import HomePage from "../components/HomePage";
-// import TeamRoom from './TeamRoom';
+import TeamRoom from "./TeamRoom";
 // render={() => <HomePage currentUser={currentUser} {...props} />}
 
 const Main = props => {
-  const { authUser, errors, removeError, currentUser, createTeam } = props;
+  const {
+    authUser,
+    errors,
+    removeError,
+    currentUser,
+    teams,
+    createTeam
+  } = props;
   return (
     <main className="l-main">
       <Switch>
@@ -29,6 +36,13 @@ const Main = props => {
               currentUser={currentUser}
               {...props}
             />
+          )}
+        />
+        <Route
+          exact
+          path="/teams/:id"
+          render={() => (
+            <TeamRoom currentUser={currentUser} teams={teams} {...props} />
           )}
         />
         <Route
@@ -69,7 +83,8 @@ const Main = props => {
 function mapStateToProps(state) {
   return {
     currentUser: state.currentUser,
-    errors: state.errors
+    errors: state.errors,
+    teams: state.teams
   };
 }
 

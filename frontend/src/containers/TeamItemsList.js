@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { fetchTeams } from "../store/actions/teams";
+import { fetchTeams, selectTeam } from "../store/actions/teams";
 import TeamItem from "../components/TeamItem";
 
 class TeamItemsList extends Component {
@@ -15,7 +15,7 @@ class TeamItemsList extends Component {
     if (this.props.teams.teams) {
       let userTeams = this.props.teams.teams;
       teamList = userTeams.map(t => (
-        <TeamItem name={t.name} imageUrl={t.imageUrl} />
+        <TeamItem team={t} onButtonClick={this.props.selectTeam}  key={t._id} />
       ));
     }
 
@@ -24,10 +24,13 @@ class TeamItemsList extends Component {
 }
 
 function mapStateToProps(state) {
-  return { teams: state.teams };
+  return {
+    teams: state.teams,
+    selectedTeam: state.selectedTeam
+  };
 }
 
 export default connect(
   mapStateToProps,
-  { fetchTeams }
+  { fetchTeams, selectTeam }
 )(TeamItemsList);

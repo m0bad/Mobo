@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import TeamMember from "../components/TeamMember";
 import MessagesForm from "../components/forms/MessagesForm";
 import ChatWindow from "./ChatWindow";
 import TeamSettingsList from "./TeamSettingsList";
+import TeamMembersList from "./TeamMembersList";
 
 class TeamRoom extends Component {
   render() {
@@ -11,10 +11,10 @@ class TeamRoom extends Component {
         <div className="container">
           <div className="row">
             <div className="col-md-2 team-members">
-              <TeamMember />
-              <TeamMember />
-              <TeamMember />
-              <TeamMember />
+              <TeamMembersList
+                currentUser={this.props.currentUser}
+                teams={this.props.teams}
+              />
             </div>
             <div className="col-md-8  main-chat">
               <ChatWindow />

@@ -15,6 +15,26 @@ exports.getTeams = async (req, res, next) => {
   }
 };
 
+exports.getMembers = async (req, res, next) => {
+  let result = [];
+  try {
+    let team = await db.Team.findById(req.params.teamId);
+    let teamStudents = team.students.map(async s => {
+      let student = await db.User.findById(s);
+      result.push(student);
+    });
+    await Promise.all(teamStudents);
+    let teamInstructors = team.instructors.map(async i => {
+      let instructor = await db.User.findById(i);
+      result.push(instructor);
+    });
+    await Promise.all(teamInstructors);
+    return res.status(200).json(result);
+  } catch (err) {
+    return next(err);
+  }
+};
+
 exports.createTeam = async (req, res, next) => {
   try {
     let creator = await db.User.findById(req.params.userId);
