@@ -89,6 +89,7 @@ exports.addUser = async (req, res, next) => {
 
 exports.deleteUser = async (req, res, next) => {
   try {
+      console.log('arrived');
     let team = await db.Team.findById(req.params.teamId);
     let user = await db.User.findById(req.params.userToRemoveId);
     // team.student.filter(student => student._id !== req.params.userToRemoveId);

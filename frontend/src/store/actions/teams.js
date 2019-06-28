@@ -2,7 +2,9 @@ import {
   LOAD_TEAMS,
   LOAD_TEAM_MEMBERS,
   CREATE_TEAM,
-  SELECT_TEAM
+  SELECT_TEAM,
+  ADD_USER_TO_TEAM
+  // REMOVE_USER_FROM_TEAM
 } from "../actionTypes";
 import { makeRequest } from "../../services/api";
 import { addError, removeError } from "./errors";
@@ -27,12 +29,22 @@ export const chooseTeam = team => ({
   team
 });
 
+export const addTeamMemer = user => ({
+  type: ADD_USER_TO_TEAM,
+  user
+});
+
+// export const removeTeamMemer = user => ({
+//   type: REMOVE_USER_FROM_TEAM,
+//   user
+// });
+
 export function createTeam(userId, userToken, teamData) {
   let data = {
     name: teamData.name,
     githubRepo: teamData.githupRepo,
     imageUrl: teamData.imageUrl,
-    Authorization: `Bearer ${userToken}`
+    Authorization: `q ${userToken}`
   };
 
   return dispatch => {
@@ -66,7 +78,11 @@ export function fetchTeamMembers(userId, teamId, userToken) {
   };
   return dispatch => {
     return new Promise((resolve, reject) => {
-      return makeRequest("get", `/api/teams/${userId}/${teamId}/members`, headerData)
+      return makeRequest(
+        "get",
+        `/api/teams/${userId}/${teamId}/members`,
+        headerData
+      )
         .then(members => {
           dispatch(loadTeamMembers(members));
           dispatch(removeError());
@@ -97,5 +113,65 @@ export function fetchTeams(userId, userToken) {
           reject();
         });
     });
+  };
+}
+
+export function addMember(userToAddUsername, userId, teamId, userToken) {
+  const headerData = {
+    Authorization: `Bearer ${userToken}`
+  };
+  return dispatch => {
+    return new Promise((resolve, reject) => {
+      return makeRequest(
+        "post",
+        `/api/teams/${userId}/${teamId}/${userToAddUsername}`
+      ).then(() => {
+        return makeRequest(
+          "get",
+          `/api/teams/${userId}/${teamId}/members`,
+          headerData
+        )
+          .then(newMembers => {
+            dispatch(loadTeamMembers(newMembers));
+            dispatch(removeError());
+            resolve();
+          })
+          .catch(err => {
+            dispatch(addError(err));
+            reject();
+          });
+      });
+    }).catch(err => {
+      dispatch(addError(err));
+    });
+  };
+}
+
+export function removeMember(userToRemoveId, userId, teamId, userToken) {
+  const headerData = {
+    Authorization: `Bearer ${userToken}`
+  };
+  return dispatch => {
+    return new Promise((resolve, reject) => {
+      return makeRequest(
+        "delete",
+        `/api/teams/${userId}/${teamId}/${userToRemoveId}`,
+        headerData
+      )
+        .then(() => {
+          return makeRequest(
+            "get",
+            `/api/teams/${userId}/${teamId}/members`,
+            headerData
+          ).then(newMembers => {
+            dispatch(loadTeamMembers(newMembers));
+            dispatch(removeError());
+            resolve();
+          });
+        })
+        .catch(err => {
+          dispatch(addError(err));
+        });
+    }).catch(err => dispatch(addError(err)));
   };
 }

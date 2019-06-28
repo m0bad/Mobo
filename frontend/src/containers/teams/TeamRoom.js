@@ -8,6 +8,8 @@ class TeamRoom extends Component {
   render() {
     return (
       <div className="team-room">
+        <myscript />
+
         <div className="container">
           <div className="row">
             <div className="col-md-2 team-members">
@@ -20,7 +22,7 @@ class TeamRoom extends Component {
               <ChatWindow />
             </div>
             <div className="col-md-2">
-              <TeamSettingsList />
+              <TeamSettingsList {...this.props} />
             </div>
             <div className="col-2" />
             <div className="col-8 msg-form">

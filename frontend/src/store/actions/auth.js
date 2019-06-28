@@ -16,7 +16,7 @@ export function logout() {
     setAuthorizationToken(false);
     dispatch(setCurrentUser({}));
     dispatch(loadTeams([]));
-    // dispatch(loadTeamMembers([]));
+    dispatch(loadTeamMembers([]));
     dispatch(selectTeam({}));
   };
 }

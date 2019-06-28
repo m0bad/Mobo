@@ -1,34 +1,75 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { button } from "react-router-dom";
+import $ from "jquery";
+import { connect } from "react-redux";
+import TeamMemberActions from "../../components/forms/TeamMemberActions";
+import { addMember, removeMember } from "../../store/actions/teams";
 
 class TeamSettingsList extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      showAddUserPopup: false,
+      showRemoveUserPopup: false
+    };
+  }
+  componentDidMount() {
+    const addUsrBtn = $("#add-usr");
+    addUsrBtn.click(() => {
+      this.setState({ showAddUserPopup: !this.state.showAddUserPopup });
+    });
+
+    const removeUsrBtn = $("#remove-usr");
+    removeUsrBtn.click(() => {
+      this.setState({ showRemoveUserPopup: !this.state.showAddUserPopup });
+    });
+  }
   render() {
     return (
       <ul className="list-group list-group-flush">
         <li className="list-group-item" style={styles.li}>
-          <Link className="btn btn-link" style={styles.anchor}>
+          <button className="btn btn-button" style={styles.anchor}>
             Send Complain
-          </Link>
+          </button>
         </li>
         <li className="list-group-item" style={styles.li}>
-          <Link className="btn btn-link" style={styles.anchor}>
+          <button className="btn btn-button" style={styles.anchor}>
             Leave Team
-          </Link>
+          </button>
         </li>
         <li className="list-group-item" style={styles.li}>
-          <Link className="btn btn-link" style={styles.anchor}>
+          <button className="btn btn-button" id="add-usr" style={styles.anchor}>
             Add User
-          </Link>
+          </button>
+          {this.state.showAddUserPopup && (
+            <TeamMemberActions
+              onAddMember={this.props.addMember}
+              {...this.props}
+            />
+          )}
         </li>
         <li className="list-group-item" style={styles.li}>
-          <Link className="btn btn-link" style={styles.anchor}>
+          <button
+            className="btn btn-button btn-danger"
+            style={styles.anchorDanger}
+            id="remove-usr"
+          >
             Remove User
-          </Link>
+          </button>
+          {this.state.showRemoveUserPopup && (
+            <TeamMemberActions
+              onRemoveMember={this.props.removeMember}
+              {...this.props}
+            />
+          )}
         </li>
         <li className="list-group-item" style={styles.li}>
-          <Link className="btn btn-link" style={styles.anchor}>
+          <button
+            className="btn btn-button btn-danger"
+            style={styles.anchorDanger}
+          >
             Delete Team
-          </Link>
+          </button>
         </li>
       </ul>
     );
@@ -41,6 +82,18 @@ const styles = {
   },
   li: {
     backgroundColor: "#F6F6F6"
+  },
+  anchorDanger: {
+    color: "#fff"
   }
 };
-export default TeamSettingsList;
+
+function mapStateToProps(state) {
+  return {
+    teamMembers: state.teamMembers
+  };
+}
+export default connect(
+  mapStateToProps,
+  { addMember, removeMember }
+)(TeamSettingsList);

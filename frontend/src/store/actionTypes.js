@@ -5,3 +5,5 @@ export const LOAD_TEAMS = "LOAD_TEAMS";
 export const CREATE_TEAM = "CREATE_TEAM";
 export const SELECT_TEAM = "SELECT_TEAM";
 export const LOAD_TEAM_MEMBERS = "LOAD_TEAM_MEMBERS";
+export const ADD_USER_TO_TEAM = "ADD_USER_TO_TEAM";
+export const REMOVE_USER_FROM_TEAM = "REMOVE_USER_FROM_TEAM";
