@@ -1,5 +1,5 @@
 import React from "react";
-import DefaultMemberImg from "../images/member.png";
+import DefaultMemberImg from "../../images/member.png";
 
 const MessageBody = props => {
   return (

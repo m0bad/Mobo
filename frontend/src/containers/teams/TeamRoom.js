@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import MessagesForm from "../../components/forms/MessagesForm";
-import ChatWindow from "../teams/ChatWindow";
+import ChatWindow from "../messages/ChatWindow";
 import TeamSettingsList from "../teams/TeamSettingsList";
 import TeamMembersList from "../teams/TeamMembersList";
 

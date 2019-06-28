@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 // import RoundedButton from "../components/RoundedButton";
-import MessageBody from "../../components/MessageBody";
+import MessageBody from "../../components/messages/MessageBody";
 
 class ChatWindow extends Component {
   render() {
