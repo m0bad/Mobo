@@ -19,7 +19,7 @@ class TeamRoom extends Component {
               />
             </div>
             <div className="col-md-8  main-chat">
-              <ChatWindow />
+              <ChatWindow {...this.props} />
             </div>
             <div className="col-md-2">
               <TeamSettingsList {...this.props} />

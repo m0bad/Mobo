@@ -16,9 +16,9 @@ app.use(bodyParser.json());
 // routes
 app.use("/api/auth", authRoutes);
 
-app.use("/api/teams/:userId", teamRoutes);
-
 app.use("/api/teams/messages/:teamId/:userId", messageRoutes);
+
+app.use("/api/teams/:userId", teamRoutes);
 
 app.use("/api/teams/complains/:teamId/:userId/:instructorId", complainRoutes);
 

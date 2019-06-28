@@ -22,7 +22,7 @@ const MessageBody = props => {
               className="font-weight-bold font-sm-left"
               style={styles.username}
             >
-              Mobad
+              {props.username}
             </span>
             <div className="card-text">{props.text}</div>
           </div>

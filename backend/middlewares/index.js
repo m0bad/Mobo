@@ -49,7 +49,7 @@ exports.isTeamMember = async (req, res, next) => {
     let is_member = team.students.includes(req.params.userId);
     let instructor_id = req.params.instructorId;
     let is_instructor = null;
-    if (instructorId) {
+    if (instructor_id) {
       is_instructor = team.instructors.includes(instructor_id);
     }
     if (is_instructor !== null) {
@@ -62,7 +62,8 @@ exports.isTeamMember = async (req, res, next) => {
         });
       }
     } else {
-      if (is_member) {
+      let isInstructor = team.instructors.includes(req.params.userId);
+      if (is_member || isInstructor) {
         return next();
       } else {
         return next({
