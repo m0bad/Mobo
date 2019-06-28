@@ -21,7 +21,7 @@ router.get("/:teamId/members", isLoggedIn,  getMembers);
 // delete a team
 router.delete("/:teamId", isLoggedIn, isInstructor, deleteTeam);
 // add user to team
-router.post("/:teamId/:userToAddId", isLoggedIn, isInstructor, addUser);
+router.post("/:teamId/:userToAddUsername", isLoggedIn, isInstructor, addUser);
 // delete user from team
 router.delete("/:teamId/:userToRemoveId", isLoggedIn, isInstructor, deleteUser);
 

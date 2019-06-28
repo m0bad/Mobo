@@ -76,7 +76,7 @@ exports.deleteTeam = async (req, res, next) => {
 exports.addUser = async (req, res, next) => {
   try {
     let team = await db.Team.findById(req.params.teamId);
-    let user = await db.User.findById(req.params.userToAddId);
+    let user = await db.User.findOne({'username': req.params.userToAddUsername});
     team.students.push(user);
     await team.save();
     user.teams.push(team);
