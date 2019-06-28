@@ -21,7 +21,7 @@ class TeamSettingsList extends Component {
 
     const removeUsrBtn = $("#remove-usr");
     removeUsrBtn.click(() => {
-      this.setState({ showRemoveUserPopup: !this.state.showAddUserPopup });
+      this.setState({ showRemoveUserPopup: !this.state.showRemoveUserPopup });
     });
   }
   render() {

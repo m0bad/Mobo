@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import { sendMessage } from "../../store/actions/messages";
 import MessagesForm from "../../components/forms/MessagesForm";
 import ChatWindow from "../messages/ChatWindow";
 import TeamSettingsList from "../teams/TeamSettingsList";
@@ -26,7 +28,7 @@ class TeamRoom extends Component {
             </div>
             <div className="col-2" />
             <div className="col-8 msg-form">
-              <MessagesForm />
+              <MessagesForm onSubmit={this.props.sendMessage} {...this.props} />
             </div>
           </div>
         </div>
@@ -35,4 +37,12 @@ class TeamRoom extends Component {
   }
 }
 
-export default TeamRoom;
+function mapStateToProps(state) {
+  return {
+    messages: state.messages
+  };
+}
+export default connect(
+  mapStateToProps,
+  { sendMessage }
+)(TeamRoom);
